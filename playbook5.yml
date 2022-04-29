@@ -1,0 +1,40 @@
+---
+- name: Conditions
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: System check and print Linux nodename
+    debug:
+      var: ansible_nodename
+
+  # *******************************************
+  # Yandex VM 1
+  - block: 
+    
+    - name: Print text for Ya1      
+      debug:
+        msg: "It`s ya-vm-test1"
+
+    - name: Print another text
+      debug:
+        msg: "Hello from vm 1"  
+
+    when: ansible_nodename == "ya-vm-test1"             
+
+
+  # *******************************************
+  # Yandex VM 2
+  - block: #Yandex VM 2
+    
+    - name: Print text for Ya2
+      debug:
+        msg: "It`s ya-vm-test2"
+
+    - name: Print another text
+      debug:
+        msg: "Hello from vm 2"  
+
+    when: ansible_nodename == "ya-vm-test2"         
+
+...

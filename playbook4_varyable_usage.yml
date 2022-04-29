@@ -1,0 +1,43 @@
+---
+- name: Varyables manadgement
+  hosts: all
+  become: true
+
+  vars:
+    message1: Hello
+    message2: World
+    secret: dknmDne33lXfj2_kNdt1
+    owner: Kelly
+  
+  tasks:  
+  - name: Print secret varyable
+    debug:
+      var: secret
+
+  - name: Debugging
+    debug:
+      msg: "Secret word: {{ secret }}"
+
+  - name: Owner description
+    debug:
+      msg: "Servers`s owner is -->{{ owner }}<--"      
+
+  - set_fact: full_massage="{{ message1 }} {{ message2 }} from {{ owner }}"
+
+  - name: Message concatenation
+    debug:
+      var: full_massage
+
+# Information from system varyable (-m setup)
+  - name: Ansible information
+    debug:
+      var: ansible_distribution
+
+  - name: Run host command
+    shell: pwd
+    register: results # Save command JSON-output in varyable
+
+  - name: Output print  
+    debug:
+      var: results.stdout #print line from JSON-format output
+...
