@@ -1,0 +1,32 @@
+---
+- name: Web Server download
+  hosts: ya-vm-test1
+  become: yes
+
+  tasks:
+    - name: Print message in loop
+      debug:
+        msg: "Employee`s name is: {{ item }}"
+      loop:
+        - "Ann"
+        - "Kate"
+        - "Victor"
+        - "Alex"
+
+    - name: Delete message
+      shell: rm /home/damian/newfile.txt 
+
+    - name: Make message in until constraction
+      shell: echo -n Z >> /home/damian/newfile.txt && cat newfile.txt
+      register: output
+      delay: 2
+      retries: 5
+      until: output.stdout.find("ZZZZ") == false
+
+    - name: Print message
+      debug:
+        var: output.stdout
+
+    - name: Delete message
+      shell: rm /home/damian/newfile.txt
+...

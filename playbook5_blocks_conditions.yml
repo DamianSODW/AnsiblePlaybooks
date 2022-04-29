@@ -15,8 +15,9 @@
     - name: Print text for Ya1      
       debug:
         msg: "It`s ya-vm-test1"
+      notify: Inform_Yandex_1 
 
-    - name: Print another text
+    - name: Print another text 1
       debug:
         msg: "Hello from vm 1"  
 
@@ -30,11 +31,24 @@
     - name: Print text for Ya2
       debug:
         msg: "It`s ya-vm-test2"
+      notify: Inform_Yandex_2  
 
-    - name: Print another text
+    - name: Print another text 1
       debug:
         msg: "Hello from vm 2"  
 
-    when: ansible_nodename == "ya-vm-test2"         
+    when: ansible_nodename == "ya-vm-test2"    
+
+
+  handlers:
+  - name: Inform_Yandex_1
+    debug:
+      msg: "Yandex 1 handler"
+    #when: ansible_nodename == "ya-vm-test1
+
+  - name: Inform_Yandex_2
+    debug:
+      msg: "Yandex 2 handler"
+    #when: ansible_nodename == "ya-vm-test2
 
 ...

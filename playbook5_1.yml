@@ -1,0 +1,30 @@
+---
+- name: Conditions
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: System check and print Linux nodename
+    debug:
+      var: ansible_nodename
+  # *******************************************
+
+  - name: Print text for Ya1      
+    shell: pwd
+    notify:
+      - Ya1 
+      - Ya2
+
+  # *******************************************
+  handlers:
+  - name: Ya1
+    debug:
+      msg: "Yandex 1 handler"
+    when: ansible_nodename=="ya-vm-test1"
+
+  - name: Ya2
+    debug:
+      msg: "Yandex 2 handler"
+    when: ansible_nodename=="ya-vm-test2"
+
+...
