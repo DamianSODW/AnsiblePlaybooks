@@ -1,0 +1,24 @@
+---
+- name: Install Apache and upload new web page
+  hosts: staging_servers
+  become: true
+
+  vars:
+    source_file: ./WebSite/index.html
+    destination_file: /var/www/html
+
+  tasks:
+  - name: Install Apache Web Server
+    yum: name=httpd state=latest
+
+  - name: Copy home page to Server
+    copy: src={{ source_file }} dest={{ destination_file }} mode=0554
+    notify: Restart_Apache  
+   
+  - name: Start Apache and Enable it on every boot
+    service: name=httpd state=started enabled=true  
+
+  handlers:
+  - name: Restart_Apache
+    service: name=httpd state=restarted
+...
