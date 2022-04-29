@@ -1,0 +1,4 @@
+/group_vars
+ansible.cfg
+ansible_example.cfg
+hosts.txt
