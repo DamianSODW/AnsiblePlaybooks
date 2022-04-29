@@ -1,4 +1,5 @@
 /group_vars
+/WebSite
 ansible.cfg
 ansible_example.cfg
 hosts.txt

@@ -1,0 +1,17 @@
+---
+- name: Install default Apache Web Server
+  hosts: staging_servers
+  become: yes
+
+  tasks:
+  - name: Stop Apache and disable it on every boot
+    service:
+     name: apache2
+     state: stopped
+     enabled: no   
+   
+  - name: Uninstall Apache Web Server
+    apt:
+      name: apache2
+      state: absent
+...
