@@ -1,6 +1,6 @@
 ---
 - name: Files creation
-  hosts: ya-vm-test1
+  hosts: all
   become: yes
   
   vars:
@@ -12,6 +12,7 @@
   
   - name: Ping my servers
     ping:
+    delegate_to: ya-vm-test1
 
   - name: Create private folder
     file:

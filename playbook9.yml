@@ -1,0 +1,31 @@
+---
+- name: Servers reboot
+  hosts: all
+  any_errors_fatal: yes
+  become: yes
+  
+  vars:
+    destination: "/home/{{ ansible_user }}/private_state"
+    user_country: "Nikoragua"
+
+  tasks:
+  
+  - name: Reboot all servers
+    shell: sleep 3
+    async: 1
+    poll: 0
+
+  - name: Wait for servers come up
+    wait_for:
+      host: "{{ inventory_hostname }}"
+      state: started
+      delay: 5
+      timeout: 40
+    delegate_to: 192.168.1.100
+    ignore_errors: yes
+
+  - name: Ping servers
+    ping:
+
+
+...
