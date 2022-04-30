@@ -1,0 +1,33 @@
+---
+- name: Files creation
+  hosts: ya-vm-test1
+  become: yes
+  
+  vars:
+    destination: "/home/{{ ansible_user }}/private_state"
+    user_country: "Nikoragua"
+
+
+  tasks:
+  
+  - name: Ping my servers
+    ping:
+
+  - name: Create private folder
+    file:
+      path: "{{ destination }}"
+      state: directory
+      mode: 0754
+
+  - name: Create file
+    copy:
+      dest: "{{ destination }}/secret_case.txt"
+      content: |
+        Text Line1
+        Text Line2
+        Text Line3, in {{ user_country }}
+
+  - name: Delete all
+    shell: "rm -r {{ destination }}"     
+   
+...
