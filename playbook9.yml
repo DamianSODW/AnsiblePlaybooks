@@ -1,8 +1,8 @@
 ---
 - name: Servers reboot
   hosts: all
-  any_errors_fatal: yes
-  become: yes
+  any_errors_fatal: true
+  become: true
   
   vars:
     destination: "/home/{{ ansible_user }}/private_state"
@@ -22,7 +22,7 @@
       delay: 5
       timeout: 40
     delegate_to: 192.168.1.100
-    ignore_errors: yes
+    ignore_errors: true
 
   - name: Ping servers
     ping:
