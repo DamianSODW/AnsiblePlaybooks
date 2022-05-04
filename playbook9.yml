@@ -26,4 +26,6 @@
 
   - name: Ping servers
     ping:
+
+    
 ...
