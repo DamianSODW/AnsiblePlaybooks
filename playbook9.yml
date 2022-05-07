@@ -25,6 +25,5 @@
     ignore_errors: true
 
   - name: Ping servers
-    ping:  
-      
+    ping:        
 ...
